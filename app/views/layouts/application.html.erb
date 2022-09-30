@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>SlackClone</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+
+    <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
+    <%= javascript_importmap_tags %>
+  </head>
+
+  <body>
+    <div style="z-index: 1; position: absolute; width: 350px; top: 70px; right: 50px;">
+      <%= render "layouts/shared/alert" %>
+    </div>
+    <%if user_signed_in?%>
+    <div class = "topbar">
+      <%=render "layouts/shared/topbar"%>
+    </div>
+    <%end%>
+    <div class="bodyContainer">
+      <%if user_signed_in?%>
+      <div id="sidebar">
+        <%=render "layouts/shared/sidebar"%>
+      </div>
+      <div class="mainContainer">
+        <%= yield %>
+      </div>
+      <%else%>
+      <div class="mainContainer">
+        <%= yield %>
+      </div>
+      <%end%>
+    </div>
+  </body>
+</html>

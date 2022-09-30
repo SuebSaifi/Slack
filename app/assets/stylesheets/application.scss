@@ -1,0 +1,64 @@
+/*
+ * This is a manifest file that'll be compiled into application.css, which will include all the files
+ * listed below.
+ *
+ * Any CSS (and SCSS, if configured) file within this directory, lib/assets/stylesheets, or any plugin's
+ * vendor/assets/stylesheets directory can be referenced here using a relative path.
+ *
+ * You're free to add application-wide styles to this file and they'll appear at the bottom of the
+ * compiled file so the styles you add here take precedence over styles defined in any other CSS
+ * files in this directory. Styles in this file should be added after the last require_* statement.
+ * It is generally better to create a new file per style scope.
+ *
+ *= require_tree .
+ *= require_self
+ */
+@import "bootstrap";
+
+.bodyContainer{
+  display: flex;
+}
+#sidebar{
+  flex: .9;
+  background-color: #3F0E40;
+  height: 100vh;
+  /*margin-top: 41px;*/
+}
+.mainContainer{
+  flex: 3;
+  margin-top: 41px;
+}
+.main_container{
+  width: 10px;  
+  background-color: red;
+
+
+}
+.topbar{
+  height: 42px;
+  width: 100vw;
+  background-color: #350d36;
+  position: fixed;
+  border-bottom: 0.2px solid grey;
+}
+.sidebarContainer{
+  margin-top: 41px;
+  color: #fff;
+}
+.topbar div ul{
+  display: flex;
+  color: #fff;
+  list-style-type: none;
+  justify-content: space-between;
+  align-items: center;
+  margin-left: 20px;
+  margin-right: 20px  ;
+}
+.topbar div ul li .Logo{
+  width: 7rem;
+
+}
+.image{
+  width:30px;
+  height:30px
+}

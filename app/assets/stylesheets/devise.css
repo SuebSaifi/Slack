@@ -1,0 +1,33 @@
+.deviceContainer{
+	margin-top: 5rem;
+	width: 100wh;
+	height: 100vh;
+}
+.deviceHeader{
+	display: flex;
+	align-items: center;
+    justify-content: center;
+    margin-bottom: 2rem;
+}
+.deviceHeader .deviceImageContainer img{
+	width: 10rem;
+}
+.deviceSecrion{
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+.deviceSectionInner{
+	width: 25vw;
+}
+.deviceButton{
+	width: 100%;
+	background: #4a154be6;
+	color: #ffffff;
+}
+.field{
+	margin-top: 2rem;
+}
+.actions{
+	margin-top: 2rem;
+}

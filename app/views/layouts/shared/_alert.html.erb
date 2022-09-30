@@ -1,0 +1,27 @@
+<% if notice %>
+  <div class="alert alert-success alert-dismissible fade show m-1" role="alert" style="z-index:1">
+    <%= notice %>
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+<% end %>
+
+<% if alert %>
+  <div class="alert alert-danger alert-dismissible fade show m-1" role="alert" style="z-index:1">
+    <%= alert %>
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+<% end %>
+
+<script>
+window.setTimeout(function()
+ {
+  $(".alert").fadeTo(500, 0).slideUp(500, function()
+    {
+      $(this).remove();
+    });
+}, 5000);
+</script>

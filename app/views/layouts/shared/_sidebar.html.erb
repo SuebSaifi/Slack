@@ -1,0 +1,22 @@
+<div class="sidebarContainer">
+<%=link_to "newChannel", new_channel_path %>
+
+		<%current_user.channels.each do |channel|%>
+	<ul>
+		<li>
+			<%= link_to channel.name , channel_path(channel.id)%>
+		<%=channel.name%>
+	</li>
+	</ul>
+	
+		
+		<%end%></br>
+		<%=current_user.invitations.each do |inv|%>
+		<%=link_to current_user.clients.first.username , invitations_path(inv.id)%>
+		<%end%>
+		<%current_user.pending_invitations.each do |pending|%>
+			<%=pending.user.username%>
+			<%=button_to "add", accept_path, params: {id: pending.id,confirmed: true}, method: :patch%>
+		<%end%>
+
+</div>

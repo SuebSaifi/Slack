@@ -1,0 +1,19 @@
+default: &default
+  adapter: postgresql
+  pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
+  timeout: 5000
+development:
+  <<: *default
+  database: Slack_development
+  username: postgres
+  password: 123456789
+  host: localhost
+production:
+  database: Slack_production
+  adapter: postgresql
+  encoding: unicode
+  pool: 5
+ 
+  username: postgres
+  password: 123456789
+  # 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

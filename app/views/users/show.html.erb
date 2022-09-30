@@ -1,0 +1,10 @@
+<h1>Users#show</h1>
+<p>Find me in app/views/users/show.html.erb</p>
+<h1>Channels#show</h1>
+<p>Find me in app/views/channels/show.html.erb</p>
+<%=current_user.clients.first.username%>
+<%current_user.clients.first.messages.each do |msg|%>
+	<%=msg.msg%>
+	<%=msg.user.email%>
+<%end%>
+

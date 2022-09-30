@@ -1,0 +1,13 @@
+<h1>Channels#show</h1>
+<p>Find me in app/views/channels/show.html.erb</p>
+<%=@channel.name%>
+<%@channel.messages.each do |msg|%>
+	<%=msg.msg%>
+	<%=msg.user.email%>
+<%end%>
+<%=form_for @message do |f|%>
+	<%=f.hidden_field :user_id, value: current_user.id%>
+	<%=f.hidden_field :channel_id, value: @channel.id%>
+	<%=f.text_field :msg, placeholder:"Enter Your message", required: true%>
+	<%=f.submit "Submit" %>
+<%end%>
