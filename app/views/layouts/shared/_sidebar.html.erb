@@ -7,12 +7,19 @@
 			<%= link_to channel.name , channel_path(channel.id)%>
 		<%=channel.name%>
 	</li>
-	</ul>
-	
-		
+	</ul>		
 		<%end%></br>
-		<%=current_user.invitations.each do |inv|%>
-		<%=link_to current_user.clients.first.username , invitations_path(inv.id)%>
+		<%User.all.each do |user|%>
+		  <%if !current_user.clients.pluck(:id).include?(user.id)%>
+			<%if !(current_user.id.to_s).match?(user.id.to_s)%>
+				<%=user.username%>
+				<%=button_to "Add User", invitations_url(:client_id=>user.id), :method=>"POST"%>
+				<%end%>
+			<%end%>
+		<%end%>
+		<%current_user.clients.each do |client|%>
+			<%inv = Invitation.find_invitation(current_user.id,client.id)%>
+			<%= link_to client.username.capitalize,invitation_path(inv), class:"directLink"%>
 		<%end%>
 		<%current_user.pending_invitations.each do |pending|%>
 			<%=pending.user.username%>

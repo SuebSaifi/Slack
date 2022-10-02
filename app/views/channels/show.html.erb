@@ -11,3 +11,8 @@
 	<%=f.text_field :msg, placeholder:"Enter Your message", required: true%>
 	<%=f.submit "Submit" %>
 <%end%>
+
+<%User.all.each do |user|%>
+	<%=user.username%>
+	<%=button_to "AddUser", channel_path(:channel_id => @channel.id, :user_id => user.id), :method => :put, :remote=> true%>
+<%end%>

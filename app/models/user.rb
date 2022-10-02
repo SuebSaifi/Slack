@@ -5,8 +5,8 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable
 
   has_one_attached :avatar
-  has_many :user_channels
-  has_many :channels, through: :user_channels
+  has_many :user_channels, dependent: :destroy
+  has_many :channels, through: :user_channels, dependent: :destroy
   has_many :messages
 
   has_many :invitations, dependent: :destroy
@@ -19,8 +19,6 @@ class User < ApplicationRecord
     ids.join().to_i
     User.find(ids)
   end
-    debugger
-
   def self.client_with?(user)
     Invitation.confirmed_record?(id,user.id)
   end

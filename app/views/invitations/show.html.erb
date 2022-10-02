@@ -1,4 +1,20 @@
+<div class="InvitationContainer">
+	<div class="topBanner">
+    <%current_user.clients.each do |client|%>
+			<%=client.username%>
+			<%=inv = Invitation.find_invitation(current_user.id,client.id)%>
+			<%= link_to client.username,invitation_path(inv)%>
+		<%end%>
+    <span></span>
+  </div>
+
 <h1>Users#show</h1>
 <p>Find me in app/views/users/show.html.erb</p>
-<h1>Channels#show</h1>
+<h1>Channels#show</h1>asfdasf
 <p>Find me in app/views/channels/show.html.erb</p>
+<%=current_user.clients%>
+<%current_user.clients.first.messages.each do |msg|%>
+	<%=msg.msg%>
+	<%=msg.user.email%>
+<%end%>
+</div>
