@@ -16,7 +16,8 @@ class ChannelsController < ApplicationController
 
   def show
     @channel = Channel.find(params[:id])
-    @message = Message.create(messages_params)
+    @messages = @channel.messages.all
+    @message = Message.new
   end
 
   def create
@@ -25,7 +26,7 @@ class ChannelsController < ApplicationController
     if @channel.save
       # notice[:flash] = "Channel Has been Created"
       UserChannel.create!(user_id: current_user.id, channel_id: @channel.id)
-      current_user.update(role: "Admin")
+      current_user.update(role: "Admin_#{@channel.id}")
       redirect_to root_path
     else
       render "new"
@@ -34,7 +35,6 @@ class ChannelsController < ApplicationController
   end
 
   def update
-    debugger
     @channel = Channel.find(params[:id])
     @user = User.find(params[:user_id])
     if !@channel.users.include?(@user)

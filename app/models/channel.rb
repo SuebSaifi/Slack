@@ -1,7 +1,7 @@
 class Channel < ApplicationRecord
 	has_many :user_channels, dependent: :destroy
 	has_many :users, through: :user_channels, dependent: :destroy
-	has_many :messages
+	has_many :messages, dependent: :destroy
 
 	# after_save :channel_user_to_admin
 

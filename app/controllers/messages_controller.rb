@@ -11,13 +11,20 @@ class MessagesController < ApplicationController
   end
 
   def create
-    # debugger
     # @channel = Channel.find(params[:id])
     @message = Message.create!(messages_params)
+    respond_to do |format|
     if @message.save
       flash[:notice] = "message"
+      format.turbo_stream do 
+        render turbo_stream:[
+          turbo_stream.update("new_message",partial: "channels/messages",locals: {message: Message.new}),
+          turbo_stream.append("messages",partial: "channels/messages_info",locals: {message: Message.new})
+      ]
+    end
       # redirect_to @channel
     end
+  end
   end
 
   def update

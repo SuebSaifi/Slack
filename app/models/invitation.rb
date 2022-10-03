@@ -3,7 +3,7 @@ class Invitation < ApplicationRecord
 	belongs_to :user
 	belongs_to :client, class_name: "User"
 
-	has_many :messages
+	has_many :messages, dependent: :destroy
 
 	def self.reacted?(id1,id2)
     case1 = !Invitation.where(user_id: id1,client_id: id2).empty?

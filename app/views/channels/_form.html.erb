@@ -1,0 +1,7 @@
+<%=form_for @channel do |f|%>
+	<div class="mb-3">
+  	<%=f.label "Channel Name", class:"form-label"%>
+		<%=f.text_field :name, class:"form-control"%>
+		<%=f.submit "Create Channel", class:"btn btn-primary mb-3 my-3"%>
+	</div>
+<%end%>

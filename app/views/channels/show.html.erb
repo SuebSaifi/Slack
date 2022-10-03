@@ -1,18 +1,18 @@
 <h1>Channels#show</h1>
 <p>Find me in app/views/channels/show.html.erb</p>
 <%=@channel.name%>
-<%@channel.messages.each do |msg|%>
-	<%=msg.msg%>
-	<%=msg.user.email%>
-<%end%>
-<%=form_for @message do |f|%>
-	<%=f.hidden_field :user_id, value: current_user.id%>
-	<%=f.hidden_field :channel_id, value: @channel.id%>
-	<%=f.text_field :msg, placeholder:"Enter Your message", required: true%>
-	<%=f.submit "Submit" %>
-<%end%>
+<div id="messages">
+<%=render partial: "channels/messages_info"%>
+</div>
+<div id="new_messages">
+	<%=render partial:"channels/messages", locals:{messages: Message.new}%>
+</div>
 
 <%User.all.each do |user|%>
-	<%=user.username%>
-	<%=button_to "AddUser", channel_path(:channel_id => @channel.id, :user_id => user.id), :method => :put, :remote=> true%>
+	<%if !(current_user.id.to_s).match?(user.id.to_s) && current_user.role == "Admin_#{@channel.id}" && current_user.clients.pluck(:id).include?(user.id)%>
+		<%if !@channel.users.pluck(:id).include?(user.id)%>
+			<%=user.username%>
+			<%=button_to "AddUser", channel_path(:channel_id => @channel.id, :user_id => user.id), :method => :put, :remote=> true%>
+		<%end%>
+	<%end%>
 <%end%>

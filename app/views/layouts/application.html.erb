@@ -26,10 +26,12 @@
       </div>
       <div class="mainContainer">
         <%= yield %>
+        <%=turbo_frame_tag "remote_modal"%> 
       </div>
       <%else%>
       <div class="mainContainer">
         <%= yield %>
+
       </div>
       <%end%>
     </div>

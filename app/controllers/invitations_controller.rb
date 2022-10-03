@@ -17,7 +17,6 @@ class InvitationsController < ApplicationController
   end
 
   def create
-    debugger
     @invitation = current_user.invitations.create(invite_params)
     if @invitation.save
       redirect_to root_path
