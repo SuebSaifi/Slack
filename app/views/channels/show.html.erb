@@ -4,10 +4,9 @@
 <div id="messages">
 <%=render partial: "channels/messages_info"%>
 </div>
-<div id="new_messages">
-	<%=render partial:"channels/messages", locals:{messages: Message.new}%>
+<div>
+	<%= render "layouts/shared/new_messages_form"%>
 </div>
-
 <%User.all.each do |user|%>
 	<%if !(current_user.id.to_s).match?(user.id.to_s) && current_user.role == "Admin_#{@channel.id}" && current_user.clients.pluck(:id).include?(user.id)%>
 		<%if !@channel.users.pluck(:id).include?(user.id)%>

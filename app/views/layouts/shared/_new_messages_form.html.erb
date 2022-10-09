@@ -1,0 +1,6 @@
+<div class="form-group msg-form">
+	<%= form_with(model:[@channel,@message], remote: true, class: "d-flex") do |f| %>
+	<%= f.text_field :msg, id: "chat-text", class: "form-control msg-content", autocomplete: "off" %>
+	<%= f.submit data: {disable_eith: false}, class: "btn btn-primary" %>
+	<% end %>
+</div>

@@ -1,5 +1,6 @@
 class ChannelsController < ApplicationController
-    before_action :authenticate_user!
+  before_action :authenticate_user!
+  before_action :set_channel
 
   def index
     if current_user
@@ -16,8 +17,8 @@ class ChannelsController < ApplicationController
 
   def show
     @channel = Channel.find(params[:id])
-    @messages = @channel.messages.all
     @message = Message.new
+    @messages = @channel.messages.order(created_at: :asc) 
   end
 
   def create
@@ -48,8 +49,12 @@ class ChannelsController < ApplicationController
   def add_user
    
   end
+
   private
 
+  def set_channel
+    @channel =Channel.find(params[:id])
+  end
   def channel_params
      params.require(:channel).permit(:name,:user_id)
   end

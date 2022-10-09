@@ -1,8 +1,0 @@
-<h1>Messages#new</h1>
-<p>Find me in app/views/messages/new.html.erb</p>
-<%debugger%>
-<%= form_with model: @messages, action: 'create' do |f| %>
-	<%=f.text_field :user_id, value: current_user.id%>
-	<%=f.text_field :msg %>
-	<%=f.submit%>
-<%end%>

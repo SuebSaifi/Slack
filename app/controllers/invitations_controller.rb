@@ -1,6 +1,7 @@
 class InvitationsController < ApplicationController
 
  before_action :authenticate_user!
+ before_action :set_invitation
 
   def index
     @user = current_user
@@ -13,7 +14,7 @@ class InvitationsController < ApplicationController
   end
 
   def show
-    # @user = User.find(params[:id])
+    
   end
 
   def create
@@ -26,7 +27,6 @@ class InvitationsController < ApplicationController
   end
 
   def accept
-    @invitation = Invitation.find(params[:id])
     accept = @invitation.update(invite_params)
     redirect_to root_path
   end
@@ -42,6 +42,9 @@ class InvitationsController < ApplicationController
   def invite_params
     params.permit(:client_id,:confirmed)
   end
-      
+  
+  def set_invitation
+    @invitation = Invitation.find(params[:id])
+  end
     
 end

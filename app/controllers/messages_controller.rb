@@ -1,5 +1,4 @@
 class MessagesController < ApplicationController
-
   def new
     @message = Message.new
   end
@@ -11,20 +10,10 @@ class MessagesController < ApplicationController
   end
 
   def create
-    # @channel = Channel.find(params[:id])
-    @message = Message.create!(messages_params)
-    respond_to do |format|
+    @message = current_user.messages.build(msg: messages_params[:msg], channel_id: params[:channel_id])
     if @message.save
       flash[:notice] = "message"
-      format.turbo_stream do 
-        render turbo_stream:[
-          turbo_stream.update("new_message",partial: "channels/messages",locals: {message: Message.new}),
-          turbo_stream.append("messages",partial: "channels/messages_info",locals: {message: Message.new})
-      ]
     end
-      # redirect_to @channel
-    end
-  end
   end
 
   def update
@@ -36,6 +25,6 @@ class MessagesController < ApplicationController
   private
 
   def messages_params
-    params.require(:message).permit(:msg, :user_id, :channel_id)
+    params.require(:message).permit(:msg)
   end
 end
