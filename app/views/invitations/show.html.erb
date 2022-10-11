@@ -11,14 +11,16 @@
 		<%end%>
     <span></span>
   </div>
+</div>
 
-<h1>Users#show</h1>
-<p>Find me in app/views/users/show.html.erb</p>
-<h1>Channels#show</h1>
-<p>Find me in app/views/channels/show.html.erb</p>
-<%=current_user.clients%>
-<%current_user.clients.first.messages.each do |msg|%>
-	<%=msg.msg%>
-	<%=msg.user.email%>
-<%end%>
+<div>
+	<%= turbo_stream_from @invitation %>
+
+	<div id="messages" style="width: 100%; height: 80vh; overflow-y: scroll; padding-right: 25px; padding-left: 25px; display: flex; flex-direction: column-reverse;">
+		<%=render partial: "invitations/invitation_mesages"%>
+	</div>
+
+	<div class="messages_form">
+		<%= render "layouts/shared/new_messages_form",invitation: @invitation%>
+	</div>
 </div>

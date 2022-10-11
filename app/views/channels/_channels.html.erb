@@ -1,0 +1,7 @@
+<%current_user.channels.each do |channel|%>
+	<ul>
+		<li>
+			<%= link_to channel.name , channel_path(channel.id)%>
+		</li>
+	</ul>		
+<%end%>

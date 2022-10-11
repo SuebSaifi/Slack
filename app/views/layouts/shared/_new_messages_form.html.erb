@@ -1,5 +1,10 @@
-<div class="form-group msg-form">
-	<%= form_with(model:[@channel,@message], remote: true, class: "d-flex") do |f| %>
+<div class="form-group msg-form" id="channel-form" style="position: fixed; bottom: 20px; width: 75vw; margin-left:20px ;">
+	<%= form_with(model:@message, remote: true, class: "d-flex") do |f| %>
+	<%if @channel.present?%>
+	<%= f.hidden_field :channel_id, value: channel.id %>
+	<%else%>
+	<%= f.hidden_field :invitation_id, value: invitation.id %>
+	<%end%>
 	<%= f.text_field :msg, id: "chat-text", class: "form-control msg-content", autocomplete: "off" %>
 	<%= f.submit data: {disable_eith: false}, class: "btn btn-primary" %>
 	<% end %>

@@ -1,11 +1,20 @@
-<h1>Channels#show</h1>
-<p>Find me in app/views/channels/show.html.erb</p>
-<%=@channel.name%>
-<div id="messages">
-<%=render partial: "channels/messages_info"%>
+<div class="InvitationContainer">
+	<div class="topBanner">
+		<span style="color: white;">
+			<%=@channel.name%>
+		</span>
+  </div>
 </div>
+
 <div>
-	<%= render "layouts/shared/new_messages_form"%>
+	<%= turbo_stream_from @channel %>
+	<div id="messages" style="width: 100%; height: 80vh; overflow-y: scroll; padding-right: 25px; padding-left: 25px; display: flex; flex-direction: column-reverse;">
+	<%=render partial: "channels/messages_info"%>
+	</div>
+
+	<div class="messages_form">
+		<%= render "layouts/shared/new_messages_form", channel: @channel%>
+	</div>
 </div>
 <%User.all.each do |user|%>
 	<%if !(current_user.id.to_s).match?(user.id.to_s) && current_user.role == "Admin_#{@channel.id}" && current_user.clients.pluck(:id).include?(user.id)%>

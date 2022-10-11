@@ -14,7 +14,9 @@ class InvitationsController < ApplicationController
   end
 
   def show
-    
+    @invitation = Invitation.find(params[:id])
+    @message = Message.new
+    @messages = @invitation.messages.order(created_at: :desc)
   end
 
   def create

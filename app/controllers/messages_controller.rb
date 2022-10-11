@@ -10,7 +10,7 @@ class MessagesController < ApplicationController
   end
 
   def create
-    @message = current_user.messages.build(msg: messages_params[:msg], channel_id: params[:channel_id])
+    @message = current_user.messages.build(msg: messages_params[:msg], channel_id: messages_params[:channel_id], invitation_id: messages_params[:invitation_id])
     if @message.save
       flash[:notice] = "message"
     end
@@ -25,6 +25,6 @@ class MessagesController < ApplicationController
   private
 
   def messages_params
-    params.require(:message).permit(:msg)
+    params.require(:message).permit(:msg,:channel_id,:invitation_id)
   end
 end
