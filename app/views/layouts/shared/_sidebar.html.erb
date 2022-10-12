@@ -1,43 +1,52 @@
 <div class="sidebarContainer">
-	<div class="NewChannel">
-		<%=link_to "newChannel", new_channel_path, "data-controller":"turbo" %>
-	</div>
+  <div class="NewChannel">
+    <%=link_to "newChannel", new_channel_path, "data-controller":"turbo" %>
+  </div>
 
-	<%= turbo_stream_from "channel" %>
-	<div id="channel">
-	  <%= render "channels/channels" %>
-	</div>
-	</br>
+  <%= turbo_stream_from "channel" %>
+  <div id="channel">
+    <%= render "channels/channels" %>
+  </div>
+  </br>
 
-	<div clsss = UserClientContainer>
-		<%current_user.clients.each do |client|%>
-			<%inv = Invitation.find_invitation(current_user.id,client.id)%>
-			<div class="UserClientconv">				
-					<%= link_to invitation_path(inv) do%>
-						<div class="UserClientconvLink">
-							<%=image_tag client.avatar, class:"UserClientConvImage"%>
-							<%=client.username.capitalize%>
-						</div>
-					<%end%>
-			</div>
-		<%end%>
-	</div>
+<!-- Friends  -->
+<%= turbo_stream_from "user_status" %>
+  <div clsss = UserClientContainer>
+    <%current_user.clients.each do |client|%>
+      <%inv = Invitation.find_invitation(current_user.id,client.id)%>
+      <div class="UserClientconv">        
+          <%= link_to invitation_path(inv) do%>
+            <div class="UserClientconvLink">
+              <div class="iconContainer" style="width: 35px; height: 35px; position: relative;">
+                <%=image_tag client.avatar, class:"UserClientConvImage image"%>
+                <%=client.username.capitalize%>
+                <div>
+                  <%= render "/users/user_status", user: client%>
+                </div>
+              </div>
+            </div>
+          <%end%>
+      </div>
+    <%end%>
+  </div>
 
-	<div class="UserclientPendingInvitation">
-		<%current_user.pending_invitations.each do |pending|%>
-			<%=pending.user.username%>
-			<%=button_to "Accept Client", accept_path, params: {id: pending.id,confirmed: true}, method: :patch%>
-		<%end%>
-	</div>
+<!-- Pending -->
+  <div class="UserclientPendingInvitation">
+    <%current_user.pending_invitations.each do |pending|%>
+      <%=pending.user.username%>
+      <%=button_to "Accept Client", accept_path, params: {id: pending.id,confirmed: true}, method: :patch%>
+    <%end%>
+  </div>
 
-	<div class="AddUserClient">
-		<%User.all.each do |user|%>
-		  <%if !current_user.clients.pluck(:id).include?(user.id)%>
-				<%if !(current_user.id.to_s).match?(user.id.to_s)%>
-					<%=user.username%>
-					<%=button_to "Add User", invitations_url(:client_id=>user.id), :method=>"POST"%>
-				<%end%>
-			<%end%>
-		<%end%>
-	</div>
+<!-- To send request -->
+  <div class="AddUserClient">
+    <%User.all.each do |user|%>
+      <%if !current_user.clients.pluck(:id).include?(user.id)%>
+        <%if !(current_user.id.to_s).match?(user.id.to_s)%>
+          <%=user.username%>
+          <%=button_to "Add User", invitations_url(:client_id=>user.id), :method=>"POST"%>
+        <%end%>
+      <%end%>
+    <%end%>
+  </div>
 </div>

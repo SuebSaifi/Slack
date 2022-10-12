@@ -2,7 +2,8 @@ class InvitationsController < ApplicationController
 
  before_action :authenticate_user!
  before_action :set_invitation
-
+ after_action :set_status
+ after_action :set_offline_status
   def index
     @user = current_user
     @pending = @user.pending_invitations
@@ -48,5 +49,12 @@ class InvitationsController < ApplicationController
   def set_invitation
     @invitation = Invitation.find(params[:id])
   end
-    
+
+  def set_status
+    current_user.update!(status: User.statuses["online"]) if current_user
+  end
+
+  def set_offline_status
+    current_user.update!(status: User.statuses["offline"]) if !current_user
+  end
 end

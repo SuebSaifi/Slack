@@ -2,7 +2,7 @@
 	<div class="topMessages" style="margin-top: 10px; margin-bottom: 10px; overflow-y:initial;" >
 		<div class="innerMessage">
 			<div class="innerMessageInfo" style="margin-right: 13px;">
-				<%=image_tag msg.user.avatar, class:"image", style:"border-radius: 5px; width: 30px"%>
+				<%=image_tag msg.user.avatar, class:"image", style:"border-radius: 5px;"%>
 			</div>
 			<div class="innerMessageContent">
 
@@ -17,6 +17,9 @@
 				</div>
 			</div>
 		</div>
+		<%if msg.attachements.attached?%>
+		
+		<%end%>
 	</div>
 <%end%>
 <style>
@@ -37,3 +40,7 @@
   background: #555; 
 }
 </style>
+
+url >>>>  http://ec2-34-203-72-18.compute-1.amazonaws.com/api/1/orders/zohov_auth_code/
+parameter >>>  ["orders": [["for_home": true, "quantity": 1, "name": "Godiva Patisserie Dessert Truffles Gift Box, 24 pc.", "sku": ""]], "user_current_time": "Wed, 12 Oct 2022 18:14"]
+Optional(["status": 1, "order": [["availability": false, "name": "Godiva Patisserie Dessert Truffles Gift Box, 24 pc."]]])

@@ -1,7 +1,7 @@
 class ChannelsController < ApplicationController
   before_action :authenticate_user!
   before_action :set_channel
-
+  after_action :set_status
   def index
     if current_user
       @channels = Channel.all
@@ -60,5 +60,9 @@ class ChannelsController < ApplicationController
   end
   def messages_params
      params.permit(:msg,:user_id, :channel_id)
+  end
+
+  def set_status
+    current_user.update!(status: User.statuses["online"]) if current_user
   end
 end

@@ -8,3 +8,4 @@ window.bootstrap = bootstrap
 window.jQuery = jquery
 window.$ = jquery
 console.log($); // ok
+import "channels"
