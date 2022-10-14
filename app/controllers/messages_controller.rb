@@ -10,7 +10,7 @@ class MessagesController < ApplicationController
   end
 
   def create
-    @message = current_user.messages.build(msg: messages_params[:msg], channel_id: messages_params[:channel_id], invitation_id: messages_params[:invitation_id], attachements: messages_params[:attachments])
+    @message = current_user.messages.build(msg: messages_params[:msg], channel_id: messages_params[:channel_id], invitation_id: messages_params[:invitation_id], attachements: messages_params[:attachements])
     if @message.save
       flash[:notice] = "message"
     end
