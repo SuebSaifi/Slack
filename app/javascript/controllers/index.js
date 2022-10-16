@@ -15,3 +15,6 @@ application.register("turbo",TurboController)
 
 import ModalController from "./modal_controller.js"
 application.register("modal",ModalController)
+
+import MessagePreviewController from "./message_preview_controller.js"
+application.register("message_preview",MessagePreviewController)

@@ -73,3 +73,5 @@ end
 gem 'devise'
 gem "pg"
 gem 'bootstrap', '~> 5.1.3'
+gem 'carrierwave', '~> 2.0'
+gem "pagy", "~> 5.10"

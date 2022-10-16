@@ -47,15 +47,15 @@ consumer.subscriptions.create("AppearanceChannel", {
   },
   install(){
     console.log("install")
-    window.removeEventListner("load", resetfunc);
-    window.removeEventListner("DOMContentLoaded", resetfunc);
-    window.removeEventListner("click", resetfunc);
-    window.removeEventListner("keydown", resetfunc);
+    window.removeEventListener("load", resetfunc);
+    window.removeEventListener("DOMContentLoaded", resetfunc);
+    window.removeEventListener("click", resetfunc);
+    window.removeEventListener("keydown", resetfunc);
 
-    window.addEventListner("load", resetfunc);
-    window.addEventListner("DOMContentLoaded", resetfunc);
-    window.addEventListner("click", resetfunc);
-    window.addEventListner("keydown", resetfunc);
+    window.addEventListener("load", resetfunc);
+    window.addEventListener("DOMContentLoaded", resetfunc);
+    window.addEventListener("click", resetfunc);
+    window.addEventListener("keydown", resetfunc);
     this.resetTimer();
   },
   resetTimer(){

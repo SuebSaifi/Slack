@@ -17,11 +17,13 @@ class InvitationsController < ApplicationController
   def show
     @invitation = Invitation.find(params[:id])
     @message = Message.new
-    @messages = @invitation.messages.order(created_at: :desc)
+    pagy_messages = @invitation.messages.order(created_at: :desc)
+    @pagy, messages = pagy(pagy_messages, items: 5)
+    @messages = messages.reverse
   end
 
   def create
-    @invitation = current_user.invitations.create(invite_params)
+    @invitation = current_user.invitations.build(invite_params)
     if @invitation.save
       redirect_to root_path
     else

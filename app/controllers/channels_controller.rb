@@ -18,7 +18,9 @@ class ChannelsController < ApplicationController
   def show
     @channel = Channel.find(params[:id])
     @message = Message.new
-    @messages = @channel.messages.order(created_at: :asc) 
+    pagy_messages = @channel.messages.order(created_at: :desc)
+    @pagy, messages = pagy(pagy_messages, items: 20)
+    @messages = messages.reverse
   end
 
   def create

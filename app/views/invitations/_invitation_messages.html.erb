@@ -1,0 +1,56 @@
+<%@messages.each do |msg|%>
+	<div class="topMessages" style="margin-top: 10px; margin-bottom: 10px; overflow-y:initial;" >
+	<div class="innerMessage">
+		<div class="innerMessageInfo" style="margin-right: 13px;">
+			<%= image_tag(msg.user.avatar, class:"image", style:"border-radius: 5px;")%>
+		</div>
+		<div class="innerMessageContent">
+
+			<strong><%=msg.user.username%></strong>
+
+			<span style = "font-size: 11px; font-weight: 400; color: grey; letter-spacing: 1.5px;">
+				<%= msg.created_at.strftime("%I:%M%p")%>
+			</span>
+
+			<div class="innerMessageMessage">
+				<%=msg.msg%>
+			</div>
+		</div>
+	</div>
+	<%if msg.attachments.attached?%>
+		<%msg.attachments.each_with_index do |attachment, index| %>
+			<%if attachment.image?%>
+				<%= image_tag(msg.chat_attachment(index)) %>
+			<%elsif attachment.video?%>
+				<%= video_tag(url_for(attachment), style:"height:auto;width:30%", controls:"")%>
+			<%elsif attachment.audio?%>
+				<%= audio_tag(url_for(attachment), controls:"")%>
+			<%else%>
+				<%= link_to attachment.filename, url_for(attachment), style:"text-decoration: none; color: #000" %>
+			<%end%>
+		<%end%>
+	<%end%>
+</div>
+<%end%>
+<style>
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: #f1f1f1; 
+}
+ 
+::-webkit-scrollbar-thumb {
+  background: #888;
+  border-radius: 20px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #555; 
+}
+</style>
+
+<!-- url >>>>  http://ec2-34-203-72-18.compute-1.amazonaws.com/api/1/orders/zohov_auth_code/
+parameter >>>  ["orders": [["for_home": true, "quantity": 1, "name": "Godiva Patisserie Dessert Truffles Gift Box, 24 pc.", "sku": ""]], "user_current_time": "Wed, 12 Oct 2022 18:14"]
+Optional(["status": 1, "order": [["availability": false, "name": "Godiva Patisserie Dessert Truffles Gift Box, 24 pc."]]]) -->

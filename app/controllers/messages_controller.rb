@@ -1,4 +1,5 @@
 class MessagesController < ApplicationController
+  include MessagesHelper
   def new
     @message = Message.new
   end
@@ -10,7 +11,15 @@ class MessagesController < ApplicationController
   end
 
   def create
-    @message = current_user.messages.build(msg: messages_params[:msg], channel_id: messages_params[:channel_id], invitation_id: messages_params[:invitation_id], attachements: messages_params[:attachements])
+    @message = current_user.messages.create(
+        msg: messages_params[:msg],
+        channel_id: messages_params[:channel_id],
+        invitation_id: messages_params[:invitation_id],
+        attachments: messages_params[:attachments]
+      )
+
+    @message.msg = prase_at_mentions(@message.msg)
+
     if @message.save
       flash[:notice] = "message"
     end
@@ -25,6 +34,6 @@ class MessagesController < ApplicationController
   private
 
   def messages_params
-    params.require(:message).permit(:msg,:channel_id,:invitation_id, attachements: [])
+    params.require(:message).permit(:msg,:channel_id,:invitation_id, attachments: [])
   end
 end

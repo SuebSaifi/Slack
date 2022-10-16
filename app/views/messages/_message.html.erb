@@ -1,4 +1,32 @@
-<div>
-	<h6 class="name"> <%=message.user.email %></h6>
-	<%= message.msg %>
+<div class="topMessages" style="margin-top: 10px; margin-bottom: 10px; overflow-y:initial;" >
+	<div class="innerMessage">
+		<div class="innerMessageInfo" style="margin-right: 13px;">
+			<%= image_tag(message.user.avatar, class:"image", style:"border-radius: 5px;")%>
+		</div>
+		<div class="innerMessageContent">
+
+			<strong><%=message.user.username%></strong>
+
+			<span style = "font-size: 11px; font-weight: 400; color: grey; letter-spacing: 1.5px;">
+				<%= message.created_at.strftime("%I:%M%p")%>
+			</span>
+
+			<div class="innerMessageMessage">
+				<%=message.msg%>
+			</div>
+		</div>
+	</div>
+	<%if message.attachments.attached?%>
+		<%message.attachments.each_with_index do |attachment, index| %>
+			<%if attachment.image?%>
+				<%= image_tag(message.chat_attachment(index)) %>
+			<%elsif attachment.video?%>
+				<%= video_tag(url_for(attachment), style:"height:auto,width:100%", controls:"")%>
+			<%elsif attachment.audio?%>
+				<%= audio_tag(url_for(attachment), controls:"")%>
+			<%else%>
+				<%= link_to attachment.filename, url_for(attachment), style:"text-decoration: none; color: #000" %>
+			<%end%>
+		<%end%>
+	<%end%>
 </div>
